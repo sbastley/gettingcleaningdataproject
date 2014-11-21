@@ -20,3 +20,5 @@ The previous data loaded and no longer used is then removed and an organized, wi
 From the previous data set, another data set is created with the average of each variable for each activity and each subject. This is done using the aggregate function by activity and then by subject.
 
 Then another more readable data set is made using the melt function in the reshape2 package. This reshapes the data into a long, narrow format.
+
+Then the specified data is written to a text file. The wide format data set was chosen since it gives each variable its own column while the narrow data set puts variables in a variable column and may not adhere to the tidy data guidelines.

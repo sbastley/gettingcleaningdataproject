@@ -64,3 +64,6 @@ rm(bylist)
 
 ##Further tidy the data to make it easier to read in a long, narrow format using melt
 narrow <- melt(wide, id.vars=c("activity","subject"))
+
+##Write tidy data to a file(wide or narrow)
+write.table(wide, file="./tidydata.txt", row.names=FALSE)
