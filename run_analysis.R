@@ -1,4 +1,4 @@
-##R script to load, combine, extract, tidy, and write data
+##R script to load, combine, extract, label, and tidy data
 
 ##Load reshape2 package. This is the only package used beyond base
 library(reshape2)
@@ -46,8 +46,7 @@ fdata$activity[fdata$activity == 4] <- "Sitting"
 fdata$activity[fdata$activity == 5] <- "Standing"
 fdata$activity[fdata$activity == 6] <- "Laying"
 
-##Make variable names clearer by making all lower case, removing parentheses, removing
-##underscores and dashes, and expanding some abbreviations. t(time) and f(frequency) left as is
+##Make variable names clearer by making all lower case, removing parentheses and dashes, and expanding some abbreviations. t(time) and f(frequency) left as is
 
 names(fdata) <- tolower(names(fdata))
 names(fdata) <- gsub("[:()-_:]","", names(fdata))
@@ -60,8 +59,8 @@ rm(activity,features,subject,subjecttest,subjecttrain,xtest,xtrain,ytest,ytrain,
 
 ##Make new tidy data set with average(mean) values by subject and activity
 bylist <- list(activity=fdata$activity,subject=fdata$subject)
-tidy <- aggregate(fdata[,3:81], by=bylist, mean)
+wide <- aggregate(fdata[,3:81], by=bylist, mean)
 rm(bylist)
 
 ##Further tidy the data to make it easier to read in a long, narrow format using melt
-tidy1 <- melt(tidy, id.vars=c("activity","subject"))
+narrow <- melt(wide, id.vars=c("activity","subject"))

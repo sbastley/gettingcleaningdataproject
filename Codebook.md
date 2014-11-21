@@ -3,7 +3,7 @@ title: "Codebook.md"
 ---
 Only reshape2 package was used beyond base.
 
-This script uses data from a database containing accelerometer and gyroscope data from a Samsung Galaxy S II phone with 30 participants performing six activities each. It uses variables such as tBodyAcc-XYZ which stands for time body acceleromter in the x, y, and z axes. The script extracts variables that are the mean and std(standard deviation) of such variables. It also removes characters like parentheses and dashes and expands some abbreviations such as accelerometer for acc.
+This script uses data from a database containing accelerometer and gyroscope data from a Samsung Galaxy S II phone with 30 participants performing six activities each. It uses variables such as tBodyAcc-XYZ which stands for time body accelerometer in the x, y, and z axes. The script extracts variables that are the mean and std(standard deviation) of such variables. It also removes characters like parentheses and dashes and expands some abbreviations such as accelerometer for acc.
 
 This process assumes the data is contained inside an unzipped folder "getdata-projectfiles-UCI HAR Dataset" in the working directory which contains another folder "UCI HAR Dataset" which contains the files and folders containing the data.
 
@@ -41,20 +41,20 @@ Then merge activity data frame to main data frame using cbind
 Replace activity numbers with descriptive activity names in activity_labels.txt using subsetting 
 e.g.fdata$activity[fdata$activity == 1] <- "Walking"
 
-Clean variable names to make lower case, remove parentheseses and dashes, and expand some abbreviations. Left t and f alone. They stand for time and frequency. 
+Clean variable names to make lower case, remove parentheses and dashes, and expand some abbreviations. Left t and f alone. They stand for time and frequency. 
 e.g. names(fdata) <- gsub("[:()-_:]","", names(fdata))
 
 Remove previous data left over after making new main data set using rm
 
 Make new tidy data set with average values by subject and activity using the aggregate function with a list of the activity and subject columns. This makes a tidy, wide format data set. The data set used in the aggregate function is subset for the mean function to work on. The list is removed after the tidy data set is made
 e.g. bylist <- list(activity=fdata$activity,subject=fdata$subject)
-tidy <- aggregate(fdata[,3:81], by=bylist, mean)
+wide <- aggregate(fdata[,3:81], by=bylist, mean)
 
 Made another tidy data set by using melt to make a long, narrow data set which I believe to be more readable.
-e.g. tidy1 <- melt(tidy, id.vars=c("activity","subject"))
+e.g. narrow <- melt(tidy, id.vars=c("activity","subject"))
 
 The data can be then written to a file using write.table
-write.table(tidy or tidy1, file="./tidydata.txt", row.names=FALSE)
+write.table(wide or narrow, file="./tidydata.txt", row.names=FALSE)
 
 The file can be read back in using
 data <- read.table("./tidydata.txt", header=TRUE, sep=" ")

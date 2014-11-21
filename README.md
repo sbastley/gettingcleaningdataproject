@@ -7,7 +7,7 @@ The run_analysis.R script loads, combines, label, extracts, and creates a large 
 
 Merges the training and the test sets to create one data set.
 
-Extracts only the measurements on the mean and standard deviation for each measurement. Mean frequenciy variables are included.
+Extracts only the measurements on the mean and standard deviation for each measurement. Mean frequency variables are included.
 
 Uses descriptive activity names to name the activities in the data set.
 
