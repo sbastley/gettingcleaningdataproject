@@ -51,7 +51,7 @@ e.g. bylist <- list(activity=fdata$activity,subject=fdata$subject)
 wide <- aggregate(fdata[,3:81], by=bylist, mean)
 
 Made another tidy data set by using melt to make a long, narrow data set which I believe to be more readable.
-e.g. narrow <- melt(tidy, id.vars=c("activity","subject"))
+e.g. narrow <- melt(wide, id.vars=c("activity","subject"))
 
 The data can be then written to a file using write.table
 write.table(wide or narrow, file="./tidydata.txt", row.names=FALSE)
